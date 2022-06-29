@@ -34,7 +34,8 @@ A test project for the Backend Surplus.
 cd test-backend-surplus
 ```
 
-3. Create database : `test_backend_surplus`
+```
+```
 
 4. Copy the environtment variables.
 ```
@@ -55,6 +56,27 @@ php artisan key:generate
 ```
 php artisan migrate --seed
 ```
+
+## Testing
+
+available endpoints :
+| Method     | URI                 | Description      |
+| ---------- | ------------------- | ---------------- |
+| Generate   | api/categories      | Category index   |
+| POST       | api/categories      | Category store   |
+| DELETE     | api/categories/{id} | Category destroy |
+| PUT\|PATCH | api/categories/{id} | Category update  |
+| Generate   | api/categories/{id} | Category show    |
+| POST       | api/images          | Image store      |
+| Generate   | api/images          | Image index      |
+| DELETE     | api/images/{id}     | Image destroy    |
+| PUT\|PATCH | api/images/{id}     | Image update     |
+| Generate   | api/images/{id}     | Image show       |
+| Generate   | api/products        | Product index    |
+| POST       | api/products        | Product store    |
+| PUT\|PATCH | api/products/{id}   | Product update   |
+| DELETE     | api/products/{id}   | Product destroy  |
+| Generate   | api/products/{id}   | Product show     |
 
 
 
