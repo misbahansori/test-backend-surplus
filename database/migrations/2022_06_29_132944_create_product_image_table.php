@@ -15,8 +15,8 @@ class CreateProductImageTable extends Migration
     {
         Schema::create('product_image', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('image_id')->constrained();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('image_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
