@@ -34,7 +34,9 @@ A test project for the Backend Surplus.
 cd test-backend-surplus
 ```
 
+3. Create database : `test_backend_surplus`
 ```
+CREATE DATABASE test_backend_surplus
 ```
 
 4. Copy the environtment variables.
