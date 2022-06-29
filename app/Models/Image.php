@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Product extends Model
+class Image extends Model
 {
     use HasFactory;
 
@@ -14,13 +14,13 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'enable'];
+    protected $fillable = ['name', 'file', 'enable'];
 
     /**
-     * Get the relation of the images.
+     * Get the relation of the products
      */
-    public function images()
+    public function products()
     {
-        return $this->belongsToMany(Image::class, 'product_image');
+        return $this->belongsToMany(Product::class, 'product_image');
     }
 }

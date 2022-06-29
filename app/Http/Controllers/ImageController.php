@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Image;
 use Illuminate\Http\Request;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\ImageResource;
 
-class ProductController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +15,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::query()
-            ->with('images')
+        $images = Image::query()
+            ->with('products')
             ->where('enable', true)
             ->paginate(25);
 
-        return ProductResource::collection($products);
+        return ImageResource::collection($images);
     }
 
     /**
@@ -43,35 +43,35 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name'        => 'required|string|min:3|max:255',
-            'description' => 'required|string|min:10',
+            'file'        => 'required|string|min:3|max:255',
             'enable'      => 'required|boolean',
         ]);
 
-        $product = Product::create($validated);
+        $image = Image::create($validated);
 
-        return new ProductResource($product);
+        return new ImageResource($image);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Image $image)
     {
-        $product->loadMissing('images');
+        $image->loadMissing('products');
 
-        return new ProductResource($product);
+        return new ImageResource($image);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Image $image)
     {
         //
     }
@@ -80,31 +80,31 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Image $image)
     {
         $validated = $request->validate([
             'name'        => 'required|string|min:3|max:255',
-            'description' => 'required|string|min:10',
+            'file'        => 'required|string|min:3|max:255',
             'enable'      => 'required|boolean',
         ]);
 
-        $product->update($validated);
+        $image->update($validated);
 
-        return new ProductResource($product);
+        return new ImageResource($image);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Image $image)
     {
-        $product->delete();
+        $image->delete();
 
         return response()->noContent();
     }

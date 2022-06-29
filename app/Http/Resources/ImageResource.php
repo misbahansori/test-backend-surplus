@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\ImageResource;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class ImageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,10 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name'        => $this->name,
-            'description' => $this->description,
-            'enable'      => (bool) $this->enable,
-            'images'      => ImageResource::collection($this->whenLoaded('images')),
+            'name'     => $this->name,
+            'file'     => $this->file,
+            'enable'   => (bool) $this->enable,
+            'products' => ProductResource::collection($this->whenLoaded('products'))
         ];
     }
 }
