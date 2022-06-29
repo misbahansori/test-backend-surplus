@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\CategoryResource;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::query()
+        $categories = Category::query()
             ->where('enable', true)
             ->paginate(25);
 
-        return ProductResource::collection($products);
+        return CategoryResource::collection($categories);
     }
 
     /**
@@ -42,33 +42,32 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name'        => 'required|string|min:3|max:255',
-            'description' => 'required|string|min:10',
             'enable'      => 'required|boolean',
         ]);
 
-        $product = Product::create($validated);
+        $category = Category::create($validated);
 
-        return new ProductResource($product);
+        return new CategoryResource($category);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Category $category)
     {
-        return new ProductResource($product);
+        return new CategoryResource($category);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Category $category)
     {
         //
     }
@@ -77,31 +76,30 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Category $category)
     {
         $validated = $request->validate([
             'name'        => 'required|string|min:3|max:255',
-            'description' => 'required|string|min:10',
             'enable'      => 'required|boolean',
         ]);
 
-        $product->update($validated);
+        $category->update($validated);
 
-        return new ProductResource($product);
+        return new CategoryResource($category);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Category $category)
     {
-        $product->delete();
+        $category->delete();
 
         return response()->noContent();
     }
