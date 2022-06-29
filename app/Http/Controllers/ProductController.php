@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::query()
-            ->with('images')
+            ->with('categories', 'images')
             ->where('enable', true)
             ->paginate(25);
 
@@ -60,7 +60,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->loadMissing('images');
+        $product->loadMissing('categories', 'images');
 
         return new ProductResource($product);
     }

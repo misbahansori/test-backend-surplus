@@ -15,4 +15,12 @@ class Category extends Model
      * @var array
      */
     protected $fillable = ['name', 'enable'];
+
+    /**
+     * Get the relation of the products
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_category');
+    }
 }

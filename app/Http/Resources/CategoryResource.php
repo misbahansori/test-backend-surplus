@@ -15,8 +15,9 @@ class CategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'name'   => $this->name,
-            'enable' => (bool) $this->enable,
+            'name'     => $this->name,
+            'enable'   => (bool) $this->enable,
+            'products' => ProductResource::collection($this->whenLoaded('products')),
         ];
     }
 }

@@ -19,6 +19,7 @@ class ProductResource extends JsonResource
             'name'        => $this->name,
             'description' => $this->description,
             'enable'      => (bool) $this->enable,
+            'categories'  => CategoryResource::collection($this->whenLoaded('categories')),
             'images'      => ImageResource::collection($this->whenLoaded('images')),
         ];
     }

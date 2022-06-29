@@ -16,6 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::query()
+            ->with('products')
             ->where('enable', true)
             ->paginate(25);
 
@@ -58,6 +59,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        $category->loadMissing('products');
+
         return new CategoryResource($category);
     }
 
